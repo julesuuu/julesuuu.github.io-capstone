@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneClick Credentials – Student Information</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <h2>OneClick Credentials</h2>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html" class="home-btn">Home</a>
+        <a href="#" class="login-btn">Admin Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="form-section">
+      <h1>Student Information</h1>
+      <form id="studentForm" class="info-form" novalidate>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" required>
+          <small class="error-msg"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="course">Course</label>
+          <select id="course" name="course" required>
+            <option value="">Select your course</option>
+            <option value="BSIT">BS Information Technology</option>
+            <option value="BSCS">BS Computer Science</option>
+            <option value="BSED">BS Education</option>
+            <option value="BSC">BS Criminology</option>
+            <option value="BSA">BS Accountancy</option>
+            <!-- Add more as needed -->
+          </select>
+          <small class="error-msg"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="yearLevel">Year Level</label>
+          <select id="yearLevel" name="yearLevel" required>
+            <option value="">Select year level</option>
+            <option value="1">1st Year</option>
+            <option value="2">2nd Year</option>
+            <option value="3">3rd Year</option>
+            <option value="4">4th Year</option>
+          </select>
+          <small class="error-msg"></small>
+        </div>
+
+        <button type="submit" class="cta-button">Continue</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 OneClick Credentials. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Form validation logic
+    document.getElementById('studentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      // Helper to show error
+      function showError(input, message) {
+        const group = input.parentElement;
+        const msg = group.querySelector('.error-msg');
+        msg.textContent = message;
+        input.classList.add('input-error');
+        valid = false;
+      }
+
+      // Helper to clear error
+      function clearError(input) {
+        const group = input.parentElement;
+        const msg = group.querySelector('.error-msg');
+        msg.textContent = '';
+        input.classList.remove('input-error');
+      }
+
+      // Validate Full Name
+      const fullName = document.getElementById('fullName');
+      if (!fullName.value.trim()) {
+        showError(fullName, 'Full name is required');
+      } else {
+        clearError(fullName);
+      }
+
+      // Validate Course
+      const course = document.getElementById('course');
+      if (!course.value) {
+        showError(course, 'Please select your course');
+      } else {
+        clearError(course);
+      }
+
+      // Validate Year Level
+      const yearLevel = document.getElementById('yearLevel');
+      if (!yearLevel.value) {
+        showError(yearLevel, 'Please select your year level');
+      } else {
+        clearError(yearLevel);
+      }
+
+      // If valid, proceed
+      if (valid) {
+        // Replace with actual navigation or AJAX   
+        alert('Student info saved. Proceeding to appointment details...');
+        // window.location.href = 'appointment.html';
+      }
+    });
+  </script>
+</body>
+</html>
