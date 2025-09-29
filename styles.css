@@ -214,6 +214,22 @@ body {
     font-size: 0.9rem;
 }
 
+.footer-content p {
+  color: #757575;
+  font-size: 0.9rem;
+}
+
+.footer-link {
+  margin-left: 1rem;
+  color: #64b5f6;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #42a5f5;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .nav-container {
