@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OneClick Credentials – Select Documents</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f7ff;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    nav {
+      background-color: #f8fbff;
+      border-bottom: 1px solid #e3f2fd;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(33, 150, 243, 0.1);
+    }
+    nav .logo {
+      font-size: 1.5rem;
+      color: #1976d2;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    nav a.button {
+      background-color: #64b5f6;
+      color: #fff;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      margin-left: 10px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+    nav a.button:hover {
+      background-color: #42a5f5;
+    }
+    main {
+      flex: 1;
+      max-width: 700px;
+      margin: 2rem auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
+    }
+    h2 {
+      color: #1565c0;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .summary-panel {
+      background: #f8fbff;
+      border: 1px solid #e3f2fd;
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      color: #333;
+    }
+    .summary-panel strong {
+      color: #1976d2;
+    }
+    .summary-panel a.edit-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: #64b5f6;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .summary-panel a.edit-link:hover {
+      text-decoration: underline;
+    }
+    form {
+      font-size: 1rem;
+    }
+    .document-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 12px 15px;
+      border: 1px solid #cfe3fb;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      background: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .document-item:hover {
+      background-color: #e3f0ff;
+    }
+    .document-item input[type="checkbox"] {
+      margin-right: 15px;
+      margin-top: 5px;
+      cursor: pointer;
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+    }
+    .document-info {
+      flex: 1;
+    }
+    .document-title {
+      font-weight: 600;
+      color: #1565c0;
+    }
+    .document-desc {
+      font-size: 0.9rem;
+      color: #616161;
+      margin-top: 2px;
+    }
+    .document-fee {
+      font-weight: 600;
+      margin-left: 12px;
+      color: #1976d2;
+      white-space: nowrap;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid #e3f2fd;
+      margin-top: 1.5rem;
+    }
+    .total-fee {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2196f3;
+    }
+    button.next-btn {
+      background-color: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.6rem;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: not-allowed;
+      opacity: 0.6;
+      transition: background-color 0.3s ease;
+    }
+    button.next-btn.enabled {
+      cursor: pointer;
+      opacity: 1;
+    }
+    button.next-btn:hover.enabled {
+      background-color: #1976d2;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #f8fbff;
+      border-top: 1px solid #e3f2fd;
+      font-size: 0.9rem;
+      color: #757575;
+    }
+    footer a {
+      color: #64b5f6;
+      text-decoration: none;
+      margin-left: 0.5rem;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">OneClick Credentials</a>
+    <div>
+      <a href="index.html" class="button">Home</a>
+      <a href="#" class="button">Admin Login</a>
+    </div>
+  </nav>
+  <main>
+    <div class="summary-panel">
+      <h3>Student Information</h3>
+      <p><strong>Name:</strong> <span id="summaryName"></span></p>
+      <p><strong>Course:</strong> <span id="summaryCourse"></span></p>
+      <p><strong>Year Level:</strong> <span id="summaryYearLevel"></span></p>
+      <a href="student-form.html" class="edit-link">Edit Information</a>
+    </div>
+    <h2>Select Document(s) to Request</h2>
+    <form id="documentForm">
+      <label class="document-item" tabindex="0">
+        <input type="checkbox" value="TOR" data-fee="100" />
+        <div class="document-info">
+          <div class="document-title">Transcript of Records (TOR)</div>
+          <div class="document-desc">Academic record summary</div>
+        </div>
+        <div class="document-fee">₱100</div>
+      </label>
+      <label class="document-item" tabindex="0">
+        <input type="checkbox" value="Good Moral" data-fee="50" />
+        <div class="document-info">
+          <div class="document-title">Certificate of Good Moral</div>
+          <div class="document-desc">Character reference</div>
+        </div>
+        <div class="document-fee">₱50</div>
+      </label>
+      <label class="document-item" tabindex="0">
+        <input type="checkbox" value="Diploma" data-fee="200" />
+        <div class="document-info">
+          <div class="document-title">Diploma</div>
+          <div class="document-desc">Graduation certificate</div>
+        </div>
+        <div class="document-fee">₱200</div>
+      </label>
+      <label class="document-item" tabindex="0">
+        <input type="checkbox" value="Form 137" data-fee="75" />
+        <div class="document-info">
+          <div class="document-title">Form 137</div>
+          <div class="document-desc">School report card from elementary/middle</div>
+        </div>
+        <div class="document-fee">₱75</div>
+      </label>
+      <label class="document-item" tabindex="0">
+        <input type="checkbox" value="Form 138" data-fee="75" />
+        <div class="document-info">
+          <div class="document-title">Form 138</div>
+          <div class="document-desc">Report card for senior high school</div>
+        </div>
+        <div class="document-fee">₱75</div>
+      </label>
+      <label class="document-item" tabindex="0">
+        <input type="checkbox" value="Certificate of Enrollment" data-fee="40" />
+        <div class="document-info">
+          <div class="document-title">Certificate of Enrollment</div>
+          <div class="document-desc">Proof of current enrollment</div>
+        </div>
+        <div class="document-fee">₱40</div>
+      </label>
+      <div class="bottom-bar">
+        <div class="total-fee">Total Fee: ₱<span id="totalFee">0</span></div>
+        <button type="submit" class="next-btn" id="nextBtn" disabled>Next</button>
+      </div>
+    </form>
+  </main>
+  <footer>
+    &copy; 2025 OneClick Credentials. All rights reserved.
+    <a href="privacy.html">Privacy Policy</a>
+  </footer>
+
+  <script>
+    // Retrieve student info from sessionStorage or default values
+    const studentInfo = JSON.parse(sessionStorage.getItem('studentInfo')) || {
+      name: 'Not available',
+      course: 'Not available',
+      yearLevel: 'Not available'
+    };
+    document.getElementById('summaryName').textContent = studentInfo.name;
+    document.getElementById('summaryCourse').textContent = studentInfo.course;
+    document.getElementById('summaryYearLevel').textContent = studentInfo.yearLevel;
+
+    const documentForm = document.getElementById('documentForm');
+    const checkboxes = documentForm.querySelectorAll('input[type="checkbox"]');
+    const totalFeeSpan = document.getElementById('totalFee');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateTotalFee() {
+      let total = 0;
+      checkboxes.forEach((cb) => {
+        if (cb.checked) {
+          total += parseInt(cb.dataset.fee);
+        }
+      });
+      totalFeeSpan.textContent = total;
+      nextBtn.disabled = total === 0;
+      if (total > 0) {
+        nextBtn.classList.add('enabled');
+      } else {
+        nextBtn.classList.remove('enabled');
+      }
+    }
+
+    checkboxes.forEach((cb) => {
+      cb.addEventListener('change', updateTotalFee);
+    });
+
+    documentForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (nextBtn.disabled) return;
+      // Gather selected documents
+      const selectedDocs = [...checkboxes].filter(cb => cb.checked).map(cb => cb.value);
+      sessionStorage.setItem('selectedDocuments', JSON.stringify(selectedDocs));
+      alert('Documents selected: ' + selectedDocs.join(', ') + '. Proceeding to next step...');
+      // window.location.href = 'appointment.html'; // Redirect to next page when ready
+    });
+
+    updateTotalFee();
+  </script>
+</body>
+</html>

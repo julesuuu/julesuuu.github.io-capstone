@@ -69,6 +69,28 @@
 
   <script src="script.js"></script>
   <script>
+
+    document.getElementById('studentForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  if (!this.checkValidity()) {
+    this.classList.add('was-validated');
+    return;
+  }
+
+  // Collect input values
+  const name = document.getElementById('fullName').value.trim();
+  const course = document.getElementById('course').value;
+  const yearLevel = document.getElementById('yearLevel').value;
+
+  // Save to sessionStorage as an object
+  const studentInfo = { name, course, yearLevel };
+  sessionStorage.setItem('studentInfo', JSON.stringify(studentInfo));
+
+  // Redirect to document picker page
+  window.location.href = 'document-picker.html';
+});
+
     // Form validation logic
     document.getElementById('studentForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -119,7 +141,7 @@
       if (valid) {
         // Replace with actual navigation or AJAX   
         alert('Student info saved. Proceeding to appointment details...');
-        // window.location.href = 'appointment.html';
+        window.location.href = 'document-picker.html';
       }
     });
   </script>

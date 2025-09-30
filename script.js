@@ -16,6 +16,15 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Redirecting to student application form...');
                 window.location.href = 'student-form.html';
         });
+    } 
+
+    if (cta-button) {
+        cta-button.addEventListener('click', function() {
+            // This will redirect to the student application form
+            // For now, we'll show an alert - replace with actual navigation later
+            alert('Redirecting to student application form...');
+                window.location.href = 'document-picker.html';
+        })
     }
 
     // Admin Login button click handler
